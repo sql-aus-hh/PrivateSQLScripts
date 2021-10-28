@@ -12,8 +12,10 @@ SELECT
 	,CAST(bs.first_lsn AS VARCHAR(50)) AS FirstLSN
 	,CAST(bs.last_lsn AS VARCHAR(50)) AS LastLSN
 	,bmf.physical_device_name AS PhysicalDeviceName
-	,CAST(CAST(bs.backup_size / 1000000 AS INT) AS VARCHAR(14)) 
-		+ ' ' + 'MB' AS BackupSize
+	,CAST(CAST(bs.backup_size / 1024  AS INT) AS VARCHAR(14)) 
+		+ ' ' + 'KB' AS BackupSizeKB
+	,CAST(CAST(bs.backup_size / 1024 / 1024  AS INT) AS VARCHAR(14)) 
+		+ ' ' + 'MB' AS BackupSizeMB
 	,bs.server_name AS ServerName
 	,bs.recovery_model AS RecoveryModel
 FROM msdb.dbo.backupset AS bs
